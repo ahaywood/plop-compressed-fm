@@ -1,5 +1,4 @@
 # plop-compressed-fm
----
 
 ## Installation
 This package contains a couple of generators for maintaining the Compressed.fm folder structure
@@ -10,7 +9,7 @@ Clone it directly into the root of your project directory. Then, run:
 npm install
 ```
 
-## Stubbing out a New Project Directory
+# Stubbing out a New Project Directory
 When a new project needs to be stubbed out, run:
 
 ```sh
@@ -34,13 +33,13 @@ _ SOCIAL
 _ TEXT
 ```
 
-### Updating the Folder Structure
+## Updating the Folder Structure
 
 If the folder structure needs to change, you can simply modify the folders and files inside **plop-templates/folders**
 
 > NOTE: I do have a **.keep** file inside each empty directory. This also ensures that it its included in the git repository
 
-## Stubbing out the Episode Notes
+# Stubbing out the Episode Notes
 When you need to create a new show notes file for the episode, run:
 
 ```sh
@@ -55,7 +54,7 @@ A new file will be created in the director you selected. It will automatically p
 
 The Show Notes will be stubbed out and include the sponsor information based on the selections made.
 
-### Adding or Modifying Sponsor Information
+## Adding or Modifying Sponsor Information
 
 The base sponsor template can be found at **show-notes.md.hbs**
 
