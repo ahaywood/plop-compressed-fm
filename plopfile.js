@@ -17,6 +17,8 @@ export default function (plop) {
     if (text < 1000) {
       return `0${text}`;
     }
+
+    return text
   });
 
   plop.setHelper('epNumber', (text) => {
@@ -54,8 +56,41 @@ export default function (plop) {
     }],
     actions: [{
       type: "copyFolder",
-      source: './plop-templates/folders',
+      source: './plop-templates/episode',
       target: '{{leadingZeros episodeNumber}}__{{upperCase (dashCase episodeShortName)}}',
+    }]
+  });
+
+  // create your generators here
+  plop.setGenerator('live', {
+    description: 'create a new live episode',
+    prompts: [{
+      type: 'input',
+      name: 'episodeNumber',
+      message: 'What episode number is this?'
+    }, {
+      type: 'input',
+      name: 'episodeShortName',
+      message: 'Short name for this episode?'
+    }],
+    actions: [{
+      type: "copyFolder",
+      source: './plop-templates/live',
+      target: '{{leadingZeros episodeNumber}}__{{upperCase (dashCase episodeShortName)}}',
+    }, function customAction(answers) {
+      // Print the new folder that you just created
+      // within Warp, this offers the best of both worlds because now I can
+      // Opt + Click on the path name to open within the Finder
+
+      // get the current working directory
+      const cwd = process.cwd();
+
+      // get the new folder name
+      const filePath = plop.renderString('{{leadingZeros episodeNumber}}__{{upperCase (dashCase episodeShortName)}}', answers);
+
+      // open the new folder in the finder
+      const newFolderPath = path.join(cwd, filePath);
+      console.log(`Created folder: ${newFolderPath}`);
     }]
   });
 
