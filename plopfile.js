@@ -2,6 +2,13 @@ import { readdirSync } from 'fs';
 import fs from "fs-extra";
 import path from 'path';
 
+const getMostRecentEpisode = () => {
+  const episodes = readdirSync('.', { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory() && dirent.name.startsWith('0'))
+    .map(dirent => dirent.name);
+  return episodes.sort().pop();
+}
+
 export default function (plop) {
   plop.setHelper('upperCase', (txt) => txt.toUpperCase());
 
@@ -67,7 +74,8 @@ export default function (plop) {
     prompts: [{
       type: 'input',
       name: 'episodeNumber',
-      message: 'What episode number is this?'
+      message: 'What episode number is this?',
+      default: getMostRecentEpisode()
     }, {
       type: 'input',
       name: 'episodeShortName',
