@@ -9,6 +9,11 @@ const getMostRecentEpisode = () => {
   return episodes.sort().pop();
 }
 
+const setDefaultEpisodeNumber = (previousEpisodeName) => {
+  const numberWithLeadingZeros = previousEpisodeName.split('__')[0];
+  return parseInt(numberWithLeadingZeros) + 1;
+}
+
 export default function (plop) {
   plop.setHelper('upperCase', (txt) => txt.toUpperCase());
 
@@ -55,7 +60,8 @@ export default function (plop) {
     prompts: [{
       type: 'input',
       name: 'episodeNumber',
-      message: 'What episode number is this?'
+      message: 'What episode number is this?',
+      default: setDefaultEpisodeNumber(getMostRecentEpisode())
     }, {
       type: 'input',
       name: 'episodeShortName',
@@ -75,7 +81,7 @@ export default function (plop) {
       type: 'input',
       name: 'episodeNumber',
       message: 'What episode number is this?',
-      default: getMostRecentEpisode()
+      default: setDefaultEpisodeNumber(getMostRecentEpisode())
     }, {
       type: 'input',
       name: 'episodeShortName',
